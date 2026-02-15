@@ -12,7 +12,7 @@
 
 body{
 font-family:'Orbitron',sans-serif;
-background:linear-gradient(135deg,#000,#111,#000);
+background:radial-gradient(circle at center,#111 0%,#000 70%);
 color:white;
 text-align:center;
 overflow-x:hidden;
@@ -21,8 +21,7 @@ overflow-x:hidden;
 /* Floating Dust */
 .dust{
 position:absolute;
-width:3px;
-height:3px;
+width:3px;height:3px;
 background:rgba(255,255,255,0.4);
 border-radius:50%;
 animation:float linear infinite;
@@ -33,12 +32,16 @@ to{transform:translateY(-10vh);}
 }
 
 /* 3D Coin */
-.coin-container{perspective:1000px;margin-top:60px;}
+.coin-container{
+perspective:1000px;
+margin-top:60px;
+}
 .coin{
-width:200px;height:200px;margin:auto;
+width:200px;height:200px;
+margin:auto;
 position:relative;
 transform-style:preserve-3d;
-animation:spin 8s linear infinite;
+animation:spin 10s linear infinite;
 }
 @keyframes spin{
 from{transform:rotateY(0deg);}
@@ -52,61 +55,81 @@ backface-visibility:hidden;
 }
 .coin .back{transform:rotateY(180deg);}
 
-/* Title */
-h1{margin-top:20px;font-size:28px;letter-spacing:4px;}
+/* Glow under coin */
+.glow{
+width:180px;height:20px;
+margin:20px auto;
+background:radial-gradient(ellipse at center,rgba(255,255,255,0.3),transparent);
+filter:blur(8px);
+}
 
-/* Glass Buttons */
-.buttons{margin-top:35px;}
-.btn{
-display:inline-block;
-padding:14px 35px;
-margin:10px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-letter-spacing:2px;
-color:white;
+h1{
+margin-top:10px;
+font-size:26px;
+letter-spacing:5px;
+}
+
+/* Social Icons */
+.socials{
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:30px;
+}
+.social-icon{
+width:55px;height:55px;
+border-radius:50%;
 background:rgba(255,255,255,0.08);
+padding:12px;
 backdrop-filter:blur(15px);
 border:1px solid rgba(255,255,255,0.3);
 transition:0.3s;
 }
-.btn:hover{
-background:white;color:black;
-transform:scale(1.1);
+.social-icon:hover{
+background:white;
+transform:scale(1.15);
 }
 
-/* Slider */
+/* Product Section */
 .slider{
-width:100%;
 margin:50px auto;
 overflow:hidden;
+width:100%;
 }
-
 .slides{
 display:flex;
-gap:20px;
-transition:transform 0.6s ease-in-out;
+gap:25px;
 padding:20px;
+transition:transform 0.6s ease-in-out;
 }
-
-.slides img{
-width:140px;
-height:140px;
+.product{
+text-align:center;
+flex-shrink:0;
+}
+.product img{
+width:140px;height:140px;
 object-fit:cover;
 border-radius:50%;
-flex-shrink:0;
-cursor:pointer;
 border:2px solid rgba(255,255,255,0.2);
+cursor:pointer;
 transition:0.3s;
 }
-
-.slides img:hover{
+.product img:hover{
 transform:scale(1.1);
 border:2px solid white;
 }
+.product-name{
+margin-top:10px;
+font-size:12px;
+letter-spacing:2px;
+color:#ccc;
+}
+.product-price{
+font-size:12px;
+color:white;
+}
 
-/* Popup Fullscreen */
+/* Popup */
 .popup{
 display:none;
 position:fixed;
@@ -116,13 +139,15 @@ background:black;
 justify-content:center;
 align-items:center;
 z-index:999;
+flex-direction:column;
 }
-
 .popup img{
-max-width:95%;
-max-height:95%;
+max-width:90%;
+max-height:70%;
 }
-
+.popup-info{
+margin-top:20px;
+}
 .popup span{
 position:absolute;
 top:20px;
@@ -131,36 +156,14 @@ font-size:30px;
 cursor:pointer;
 }
 
-/* Footer */
 footer{
-margin:40px 0 20px;
+margin:50px 0 20px;
 font-size:12px;
 color:gray;
-.socials{
-margin-top:30px;
-display:flex;
-justify-content:center;
-gap:30px;
-}
-
-.social-icon{
-width:50px;
-height:50px;
-border-radius:50%;
-background:rgba(255,255,255,0.08);
-padding:10px;
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,0.3);
-transition:0.3s;
-}
-
-.social-icon:hover{
-background:white;
-transform:scale(1.2);
-}
 }
 </style>
 </head>
+
 <body>
 
 <!-- Audio -->
@@ -169,90 +172,116 @@ transform:scale(1.2);
 </audio>
 
 <script>
-
-/* Activate Audio On First Tap (iPhone Safe) */
 document.addEventListener("DOMContentLoaded", function(){
 
-const music = document.getElementById("bgMusic");
-document.body.addEventListener("click", function(){
-    music.play().catch(()=>{});
-},{ once:true });
+/* Activate Audio On First Tap */
+const music=document.getElementById("bgMusic");
+document.body.addEventListener("click",function(){
+music.play().catch(()=>{});
+},{once:true});
 
 /* Floating Dust */
 for(let i=0;i<40;i++){
-    let dust=document.createElement("div");
-    dust.className="dust";
-    dust.style.left=Math.random()*100+"vw";
-    dust.style.animationDuration=(5+Math.random()*10)+"s";
-    document.body.appendChild(dust);
+let dust=document.createElement("div");
+dust.className="dust";
+dust.style.left=Math.random()*100+"vw";
+dust.style.animationDuration=(5+Math.random()*10)+"s";
+document.body.appendChild(dust);
 }
 
-/* Slider Setup */
-const slideContainer = document.querySelector('.slides');
-const slideImages = document.querySelectorAll('.slides img');
-const totalSlides = slideImages.length;
+/* Auto Slider */
+const slides=document.querySelector('.slides');
+const products=document.querySelectorAll('.product');
+let index=0;
 
-let index = 0;
-
-function updateSlide(){
-    slideContainer.style.transform = `translateX(-${index * 100}%)`;
+function autoSlide(){
+index++;
+if(index>=products.length){index=0;}
+slides.style.transform=`translateX(-${index*170}px)`;
 }
+setInterval(autoSlide,2000);
 
-/* Auto slide every 2 seconds */
-setInterval(() => {
-    index++;
-    if(index >= totalSlides){
-        index = 0;
-    }
-    updateSlide();
-}, 2000);
+/* Swipe Support */
+let startX=0;
+slides.addEventListener("touchstart",(e)=>startX=e.touches[0].clientX);
+slides.addEventListener("touchend",(e)=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50){autoSlide();}
+if(endX-startX>50){
+index--;
+if(index<0){index=products.length-1;}
+slides.style.transform=`translateX(-${index*170}px)`;
+}
+});
 
 });
 
 /* Popup */
-function openPopup(src){
+function openPopup(src,name,price){
 document.getElementById("popupImg").src=src;
+document.getElementById("popupName").innerText=name;
+document.getElementById("popupPrice").innerText=price;
 document.getElementById("popup").style.display="flex";
 }
 function closePopup(){
 document.getElementById("popup").style.display="none";
 }
-
 </script>
 
-<!-- Coin -->
+<!-- Coin Logo -->
 <div class="coin-container">
 <div class="coin">
 <img src="logo.png1.PNG">
 <img src="logo.png1.PNG" class="back">
 </div>
 </div>
+<div class="glow"></div>
 
 <h1>DRIPMAFIA CDMX</h1>
 
+<!-- Social Icons -->
 <div class="socials">
-<a href="https://www.tiktok.com/@yourusername" target="_blank">
+<a href="https://www.tiktok.com/@drip.mafia_cdmx" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" class="social-icon">
 </a>
-
-<a href="https://wa.me/521XXXXXXXXXX" target="_blank">
+<a href="https://wa.me/5215640059098" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="social-icon">
 </a>
 </div>
 
-<!-- Slider -->
+<!-- Products -->
 <div class="slider">
 <div class="slides">
-<img src="product1.jpg.heic" onclick="openPopup(this.src)">
-<img src="product2.jpg.heic" onclick="openPopup(this.src)">
-<img src="product3.jpg.heic" onclick="openPopup(this.src)">
+
+<div class="product">
+<img src="product1.jpg.heic" onclick="openPopup(this.src,'Black Bélico Cap','$899 MXN')">
+<div class="product-name">BLACK BÉLICO</div>
+<div class="product-price">$899 MXN</div>
+</div>
+
+<div class="product">
+<img src="product2.jpg.heic" onclick="openPopup(this.src,'White Hype Snap','$799 MXN')">
+<div class="product-name">WHITE HYPE</div>
+<div class="product-price">$799 MXN</div>
+</div>
+
+<div class="product">
+<img src="product3.jpg.heic" onclick="openPopup(this.src,'Midnight Street','$950 MXN')">
+<div class="product-name">MIDNIGHT</div>
+<div class="product-price">$950 MXN</div>
+</div>
+
 </div>
 </div>
 
-<!-- Fullscreen Popup -->
+<!-- Popup -->
 <div class="popup" id="popup">
 <span onclick="closePopup()">✕</span>
 <img id="popupImg">
+<div class="popup-info">
+<h2 id="popupName"></h2>
+<p id="popupPrice"></p>
+</div>
 </div>
 
 <footer>
