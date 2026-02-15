@@ -5,169 +5,221 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DripMafia CDMX</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-body {
-    background: radial-gradient(circle at center, #111 0%, #000 100%);
-    font-family: 'Orbitron', sans-serif;
-    color: white;
-    overflow: hidden;
-    text-align: center;
+body{
+font-family:'Orbitron',sans-serif;
+background:linear-gradient(135deg,#000,#111,#000);
+color:white;
+text-align:center;
+overflow-x:hidden;
 }
 
 /* Floating Dust */
-.dust {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 50%;
-    animation: float 10s infinite linear;
+.dust{
+position:absolute;
+width:3px;
+height:3px;
+background:rgba(255,255,255,0.4);
+border-radius:50%;
+animation:float linear infinite;
+}
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
 }
 
-@keyframes float {
-    from { transform: translateY(100vh) scale(0.5); }
-    to { transform: translateY(-10vh) scale(1); }
+/* 3D Coin */
+.coin-container{
+perspective:1000px;
+margin-top:60px;
 }
 
-/* 3D Coin Container */
-.coin-container {
-    perspective: 1000px;
-    margin-top: 80px;
+.coin{
+width:200px;
+height:200px;
+margin:auto;
+position:relative;
+transform-style:preserve-3d;
+animation:spin 8s linear infinite;
 }
 
-.coin {
-    width: 220px;
-    height: 220px;
-    margin: auto;
-    position: relative;
-    transform-style: preserve-3d;
-    animation: spin 6s linear infinite;
+@keyframes spin{
+from{transform:rotateY(0deg);}
+to{transform:rotateY(360deg);}
 }
 
-@keyframes spin {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+.coin img{
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+backface-visibility:hidden;
 }
 
-/* Coin Faces */
-.coin img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    backface-visibility: hidden;
+.coin .back{
+transform:rotateY(180deg);
 }
 
-/* Back side */
-.coin .back {
-    transform: rotateY(180deg);
+.coin::before{
+content:'';
+position:absolute;
+width:200px;
+height:200px;
+border-radius:50%;
+border:5px solid rgba(255,255,255,0.2);
 }
 
-/* Fake Thickness Edge */
-.coin::before {
-    content: '';
-    position: absolute;
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    border: 6px solid #333;
-    box-shadow: 0 0 15px #00f0ff;
+/* Title */
+h1{
+margin-top:20px;
+font-size:28px;
+letter-spacing:4px;
 }
 
-/* Brand Title */
-h1 {
-    margin-top: 30px;
-    font-size: 28px;
-    letter-spacing: 3px;
+/* Glass Buttons */
+.buttons{
+margin-top:35px;
 }
 
-/* Buttons */
-.buttons {
-    margin-top: 40px;
+.btn{
+display:inline-block;
+padding:14px 35px;
+margin:10px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+letter-spacing:2px;
+color:white;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.3);
+transition:0.3s;
 }
 
-.btn {
-    display: inline-block;
-    padding: 14px 30px;
-    margin: 10px;
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
-    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+.btn:hover{
+background:white;
+color:black;
+transform:scale(1.1);
 }
 
-.tiktok {
-    background: linear-gradient(45deg, #ff0050, #00f2ea);
+/* Product Slider */
+.slider{
+width:90%;
+max-width:500px;
+margin:50px auto;
+overflow:hidden;
+position:relative;
+border-radius:20px;
+backdrop-filter:blur(10px);
 }
 
-.whatsapp {
-    background: linear-gradient(45deg, #25D366, #128C7E);
+.slides{
+display:flex;
+transition:transform 0.5s ease-in-out;
 }
 
-.btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(255,255,255,0.6);
+.slides img{
+width:100%;
+border-radius:20px;
+}
+
+/* Slider Buttons */
+.prev, .next{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(255,255,255,0.1);
+border:none;
+color:white;
+font-size:24px;
+padding:10px 15px;
+cursor:pointer;
+border-radius:50%;
+backdrop-filter:blur(10px);
+}
+
+.prev{left:10px;}
+.next{right:10px;}
+
+.prev:hover,.next:hover{
+background:white;
+color:black;
 }
 
 /* Footer */
-footer {
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    font-size: 12px;
-    color: gray;
+footer{
+margin:40px 0 20px;
+font-size:12px;
+color:gray;
 }
 </style>
 </head>
-
 <body>
 
-<!-- Floating Dust Script -->
 <script>
-for (let i = 0; i < 40; i++) {
-    let dust = document.createElement("div");
-    dust.className = "dust";
-    dust.style.left = Math.random() * 100 + "vw";
-    dust.style.animationDuration = (5 + Math.random() * 10) + "s";
-    document.body.appendChild(dust);
+/* Floating Dust Generator */
+for(let i=0;i<40;i++){
+let dust=document.createElement("div");
+dust.className="dust";
+dust.style.left=Math.random()*100+"vw";
+dust.style.animationDuration=(5+Math.random()*10)+"s";
+document.body.appendChild(dust);
 }
+
+/* Slider Script */
+let index=0;
+function showSlide(n){
+const slides=document.querySelector('.slides');
+const total=document.querySelectorAll('.slides img').length;
+index=(n+total)%total;
+slides.style.transform=`translateX(${-index*100}%)`;
+}
+function nextSlide(){showSlide(index+1);}
+function prevSlide(){showSlide(index-1);}
 </script>
 
 <!-- Background Music -->
 <audio autoplay loop>
-    <source src="music.mp3.1.mp3" type="audio/mpeg">
+<source src="music.mp3.1.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 3D Spinning Coin Logo -->
+<!-- Coin Logo -->
 <div class="coin-container">
-    <div class="coin">
-        <!-- Replace with your logo image -->
-        <img src="logo.png1.PNG" alt="DripMafia Logo">
-        <img src="logo.png1.PNG" class="back" alt="DripMafia Logo">
-    </div>
+<div class="coin">
+<img src="logo.png1.PNG" alt="logo">
+<img src="logo.png1.PNG" class="back" alt="logo">
+</div>
 </div>
 
 <h1>DRIPMAFIA CDMX</h1>
 
+<!-- Buttons -->
 <div class="buttons">
-    <!-- Replace links -->
-    <a href="https://www.tiktok.com/@drip.mafia_cdmx" target="_blank" class="btn tiktok">TikTok</a>
-    <a href="https://wa.me/5215640059098" target="_blank" class="btn whatsapp">WhatsApp</a>
+<a href="https://www.tiktok.com/@drip.mafia_cdmx" target="_blank" class="btn">TikTok</a>
+<a href="https://wa.me/5215644059098" target="_blank" class="btn">WhatsApp</a>
+</div>
+
+<!-- Product Gallery Slider -->
+<div class="slider">
+<div class="slides">
+<img src="product1.jpg">
+<img src="product2.jpg">
+<img src="product3.jpg">
+</div>
+<button class="prev" onclick="prevSlide()">‹</button>
+<button class="next" onclick="nextSlide()">›</button>
 </div>
 
 <footer>
-© 2026 DripMafia CDMX - Premium Streetwear
+© 2026 DripMafia CDMX — Premium Streetwear
 </footer>
 
 </body>
