@@ -46,15 +46,15 @@ body {
 /* 3D coin spin effect */
 .logo {
     width: 170px;
-    animation: coinSpin 6s linear infinite;
+    animation: coinSpin 8s linear infinite;
     transform-style: preserve-3d;
 }
 
 @keyframes coinSpin {
-    0% {
+    from {
         transform: rotateY(0deg);
     }
-    100% {
+    to {
         transform: rotateY(360deg);
     }
 }
