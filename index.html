@@ -80,14 +80,17 @@ body {
 }
 
 /* ANIMATION */
-@keyframes fadeIn {
+.logo {
+    width: 150px; /* keep your size */
+    animation: slowSpin 12s linear infinite;
+}
+
+@keyframes slowSpin {
     from {
-        opacity: 0;
-        transform: translateY(10px);
+        transform: rotate(0deg);
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+        transform: rotate(360deg);
     }
 }
 
