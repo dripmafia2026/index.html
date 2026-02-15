@@ -1,169 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DripMafia CDMX</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRIP MAFIA CDMX</title>
+    <!-- Font Awesome for TikTok and WhatsApp icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #ffffff;
+        }
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-<style>
+        header {
+            width: 100%;
+            padding: 40px 0;
+            text-align: center;
+        }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-}
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
 
-body {
-  background: #0d0d0d;
-  color: white;
-  text-align: center;
-}
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 10px;
+            margin: 20px 0;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
 
-/* HEADER */
-.header {
-  padding: 40px 20px 20px;
-}
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            padding: 40px 0;
+        }
 
-/* STATIC LOGO */
-.logo {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 20px;
+        .product-item {
+            text-align: center;
+        }
 
-  /* Force no movement */
-  animation: none;
-  transform: none;
-  transition: none;
-}
+        .product-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%; /* Makes images rounded */
+            border: 1px solid #333;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
 
-.brand-name {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: 3px;
-}
+        .product-item img:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+        }
 
-.tagline {
-  font-size: 14px;
-  color: #aaa;
-  margin-top: 8px;
-}
+        /* Social Buttons */
+        .social-links {
+            margin: 40px 0;
+            display: flex;
+            gap: 20px;
+        }
 
-/* PRODUCTS */
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 25px;
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: auto;
-}
+        .social-btn {
+            color: var(--bg-color);
+            background-color: var(--accent-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
 
-.product {
-  background: #151515;
-  padding: 20px;
-  border-radius: 20px;
-}
-
-.product img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-}
-
-.product h3 {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.product p {
-  font-size: 13px;
-  color: #aaa;
-  margin-top: 5px;
-}
-
-/* SOCIAL BUTTONS */
-.socials {
-  margin: 40px 0;
-}
-
-.socials a {
-  display: inline-block;
-  margin: 0 10px;
-  padding: 12px 20px;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  color: white;
-}
-
-.tiktok {
-  background: #111;
-  border: 1px solid #333;
-}
-
-.whatsapp {
-  background: #25D366;
-}
-
-/* FOOTER */
-footer {
-  margin: 40px 0 20px;
-  font-size: 12px;
-  color: #555;
-}
-
-</style>
+        .social-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="header">
-  <img src="images/logo.png1.PNG">
-  <div class="brand-name">DRIPMAFIA CDMX</div>
-  <div class="tagline">Premium Streetwear • Exclusive Drops</div>
-</div>
+    <header>
+        <div class="logo.png1.PNG">Your Logo</div>
+        <h1>DRIP MAFIA CDMX</h1>
+    </header>
 
-<div class="products">
+    <div class="product-grid">
+        <!-- 10 Product Placeholders -->
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 1"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 2"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 3"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 4"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 5"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 6"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 7"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 8"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 9"></div>
+        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 10"></div>
+    </div>
 
-  <div class="product">
-    <img src="product1.jpg.heic" alt="Hype Cap">
-    <h3>Hype Cap</h3>
-    <p>$500 MXN</p>
-  </div>
-
-  <div class="product">
-    <img src="product2.jpg.heic" alt="Urban Snapback">
-    <h3>Urban Snapback</h3>
-    <p>$500 MXN</p>
-  </div>
-
-  <div class="product">
-    <img src="product3.jpg.heic" alt="Limited Edition">
-    <h3>Limited Edition</h3>
-    <p>$500 MXN</p>
-  </div>
-
-</div>
-
-<div class="socials">
- <a href="https://www.tiktok.com/@drip.mafia_cdmx" target="_blank">
-    <i class="fab fa-tiktok"></i>
-</a>
-  <a href="https://wa.me/5215640059098" target="_blank" class="whatsapp">WhatsApp</a>
-</div>
-
-<footer>
-  © 2026 DripMafia CDMX. All rights reserved.
-</footer>
+    <div class="social-links">
+        <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
 
 </body>
 </html>
