@@ -8,11 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:'Orbitron',sans-serif;
@@ -37,58 +33,30 @@ to{transform:translateY(-10vh);}
 }
 
 /* 3D Coin */
-.coin-container{
-perspective:1000px;
-margin-top:60px;
-}
-
+.coin-container{perspective:1000px;margin-top:60px;}
 .coin{
-width:200px;
-height:200px;
-margin:auto;
+width:200px;height:200px;margin:auto;
 position:relative;
 transform-style:preserve-3d;
 animation:spin 8s linear infinite;
 }
-
 @keyframes spin{
 from{transform:rotateY(0deg);}
 to{transform:rotateY(360deg);}
 }
-
 .coin img{
 position:absolute;
-width:100%;
-height:100%;
+width:100%;height:100%;
 border-radius:50%;
 backface-visibility:hidden;
 }
-
-.coin .back{
-transform:rotateY(180deg);
-}
-
-.coin::before{
-content:'';
-position:absolute;
-width:200px;
-height:200px;
-border-radius:50%;
-border:5px solid rgba(255,255,255,0.2);
-}
+.coin .back{transform:rotateY(180deg);}
 
 /* Title */
-h1{
-margin-top:20px;
-font-size:28px;
-letter-spacing:4px;
-}
+h1{margin-top:20px;font-size:28px;letter-spacing:4px;}
 
 /* Glass Buttons */
-.buttons{
-margin-top:35px;
-}
-
+.buttons{margin-top:35px;}
 .btn{
 display:inline-block;
 padding:14px 35px;
@@ -98,19 +66,17 @@ text-decoration:none;
 font-weight:bold;
 letter-spacing:2px;
 color:white;
-background:rgba(255,255,255,0.1);
+background:rgba(255,255,255,0.08);
 backdrop-filter:blur(15px);
 border:1px solid rgba(255,255,255,0.3);
 transition:0.3s;
 }
-
 .btn:hover{
-background:white;
-color:black;
+background:white;color:black;
 transform:scale(1.1);
 }
 
-/* Product Slider */
+/* Slider */
 .slider{
 width:90%;
 max-width:500px;
@@ -118,40 +84,42 @@ margin:50px auto;
 overflow:hidden;
 position:relative;
 border-radius:20px;
-backdrop-filter:blur(10px);
 }
 
 .slides{
 display:flex;
-transition:transform 0.5s ease-in-out;
+transition:transform 0.6s ease-in-out;
 }
 
 .slides img{
 width:100%;
+cursor:pointer;
 border-radius:20px;
 }
 
-/* Slider Buttons */
-.prev, .next{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-background:rgba(255,255,255,0.1);
-border:none;
-color:white;
-font-size:24px;
-padding:10px 15px;
-cursor:pointer;
-border-radius:50%;
-backdrop-filter:blur(10px);
+/* Popup Fullscreen */
+.popup{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:black;
+justify-content:center;
+align-items:center;
+z-index:999;
 }
 
-.prev{left:10px;}
-.next{right:10px;}
+.popup img{
+max-width:95%;
+max-height:95%;
+}
 
-.prev:hover,.next:hover{
-background:white;
-color:black;
+.popup span{
+position:absolute;
+top:20px;
+right:30px;
+font-size:30px;
+cursor:pointer;
 }
 
 /* Footer */
@@ -164,8 +132,19 @@ color:gray;
 </head>
 <body>
 
+<!-- Audio -->
+<audio id="bgMusic" loop>
+<source src="music.mp3.1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-/* Floating Dust Generator */
+/* Activate Audio On First Tap */
+document.body.addEventListener("click", function(){
+let music = document.getElementById("bgMusic");
+music.play();
+},{ once:true });
+
+/* Floating Dust */
 for(let i=0;i<40;i++){
 let dust=document.createElement("div");
 dust.className="dust";
@@ -174,48 +153,55 @@ dust.style.animationDuration=(5+Math.random()*10)+"s";
 document.body.appendChild(dust);
 }
 
-/* Slider Script */
+/* Auto Slider Every 2 Seconds */
 let index=0;
-function showSlide(n){
-const slides=document.querySelector('.slides');
-const total=document.querySelectorAll('.slides img').length;
-index=(n+total)%total;
-slides.style.transform=`translateX(${-index*100}%)`;
+const slides=document.querySelectorAll('.slides img');
+
+function showSlide(){
+const container=document.querySelector('.slides');
+index=(index+1)%slides.length;
+container.style.transform=`translateX(${-index*100}%)`;
 }
-function nextSlide(){showSlide(index+1);}
-function prevSlide(){showSlide(index-1);}
+setInterval(showSlide,2000);
+
+/* Popup */
+function openPopup(src){
+document.getElementById("popupImg").src=src;
+document.getElementById("popup").style.display="flex";
+}
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
 </script>
 
-<!-- Background Music -->
-<audio autoplay loop>
-<source src="music.mp3.1.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Coin Logo -->
+<!-- Coin -->
 <div class="coin-container">
 <div class="coin">
-<img src="logo.png1.PNG" alt="logo">
-<img src="logo.png1.PNG" class="back" alt="logo">
+<img src="logo.png1.PNG">
+<img src="logo.png1.PNG" class="back">
 </div>
 </div>
 
 <h1>DRIPMAFIA CDMX</h1>
 
-<!-- Buttons -->
 <div class="buttons">
 <a href="https://www.tiktok.com/@drip.mafia_cdmx" target="_blank" class="btn">TikTok</a>
-<a href="https://wa.me/5215644059098" target="_blank" class="btn">WhatsApp</a>
+<a href="https://wa.me/5215640059098" target="_blank" class="btn">WhatsApp</a>
 </div>
 
-<!-- Product Gallery Slider -->
+<!-- Slider -->
 <div class="slider">
 <div class="slides">
-<img src="product1.jpg">
-<img src="product2.jpg">
-<img src="product3.jpg">
+<img src="product1.jpg" onclick="openPopup(this.src)">
+<img src="product2.jpg" onclick="openPopup(this.src)">
+<img src="product3.jpg" onclick="openPopup(this.src)">
 </div>
-<button class="prev" onclick="prevSlide()">‹</button>
-<button class="next" onclick="nextSlide()">›</button>
+</div>
+
+<!-- Fullscreen Popup -->
+<div class="popup" id="popup">
+<span onclick="closePopup()">✕</span>
+<img id="popupImg">
 </div>
 
 <footer>
