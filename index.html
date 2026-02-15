@@ -123,11 +123,29 @@ Private Orders
 NFC AUTHENTICATED • LIMITED RELEASE • CDMX
 </div>
 <!-- Background Music -->
-<audio id="bgMusic" autoplay loop playsinline>
+<audio id="bgMusic" autoplay muted loop playsinline>
     <source src="music.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+window.addEventListener("touchstart", enableSound, { once: true });
+window.addEventListener("click", enableSound, { once: true });
+
+function enableSound() {
+    var music = document.getElementById("bgMusic");
+    music.muted = false;
+    music.volume = 0;
+    music.play();
+
+    let fade = setInterval(function () {
+        if (music.volume < 0.25) {
+            music.volume += 0.02;
+        } else {
+            clearInterval(fade);
+        }
+    }, 100);
+}
+</script>
 
 
 
