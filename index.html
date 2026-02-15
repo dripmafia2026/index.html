@@ -25,15 +25,18 @@ body {
 }
 
 /* LOGO */
-.logo-container {
-    margin-bottom: 55px;
-    animation: fadeIn 1.5s ease-in-out;
+.logo {
+    width: 150px; /* keep your size */
+    animation: slowSpin 12s linear infinite;
 }
 
-.logo-container img {
-    max-width: 220px;
-    width: 100%;
-    height: auto;
+@keyframes slowSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* BRAND NAME */
@@ -79,23 +82,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* ANIMATION */
-.logo {
-    width: 150px; /* keep your size */
-    animation: slowSpin 12s linear infinite;
-}
-
-@keyframes slowSpin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-</style>
-</head>
 
 <body>
 
