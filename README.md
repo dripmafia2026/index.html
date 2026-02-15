@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>HYPE CAPS CDMX</title>
+<title>DripMafia CDMX</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body style="background:black;color:white;text-align:center;font-family:sans-serif;padding:40px;">
