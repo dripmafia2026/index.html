@@ -6,92 +6,102 @@
 <title>HYPE CAPS CDMX</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background: #000;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fff;
+    margin: 0;
+    background: #0a0a0a;
+    color: #f5f5f5;
+    font-family: "Helvetica Neue", Arial, sans-serif;
     text-align: center;
-    padding: 40px 20px;
+    padding: 60px 20px;
+    letter-spacing: 1px;
 }
 
-.logo {
-    font-size: 32px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-}
-
-.tagline {
-    font-size: 14px;
-    opacity: 0.7;
+.logo-container {
     margin-bottom: 40px;
+    animation: fadeIn 2s ease-in-out;
 }
 
-.btn {
+.logo-container img,
+.logo-container video {
+    max-width: 220px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.divider {
+    width: 60px;
+    height: 1px;
+    background: #888;
+    margin: 20px auto 40px auto;
+}
+
+.button {
     display: block;
-    width: 100%;
-    max-width: 320px;
-    margin: 15px auto;
-    padding: 15px;
-    border-radius: 8px;
+    max-width: 300px;
+    margin: 18px auto;
+    padding: 14px;
+    border: 1px solid #666;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s ease;
+    color: #f5f5f5;
+    font-weight: 300;
+    transition: 0.4s ease;
 }
 
-.instagram {
-    background: #fff;
-    color: #000;
-}
-
-.tiktok {
-    background: #111;
-    border: 2px solid #fff;
-    color: #fff;
-}
-
-.whatsapp {
-    background: #25D366;
-    color: #fff;
-}
-
-.btn:hover {
-    transform: scale(1.05);
+.button:hover {
+    background: #f5f5f5;
+    color: #0a0a0a;
+    border-color: #f5f5f5;
 }
 
 .footer {
-    margin-top: 50px;
+    margin-top: 70px;
     font-size: 12px;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 </style>
 </head>
 
 <body>
 
-<div class="logo">🔥 HYPE CAPS CDMX 🔥</div>
-<div class="tagline">Tap • Explore • Shop</div>
+<div class="logo-container">
+    <!-- OPTION A: If your logo is GIF -->
+    <img src="logo.gif" alt="Brand Logo">
 
-<a class="btn instagram" href="https://instagram.com/YOURUSERNAME" target="_blank">
+    <!-- OPTION B: If your logo is MP4 (uncomment below and delete img above) -->
+    <!--
+    <video autoplay muted loop playsinline>
+        <source src="logo.mp4" type="video/mp4">
+    </video>
+    -->
+</div>
+
+<div class="brand-name">HYPE CAPS CDMX</div>
+<div class="divider"></div>
+
+<a class="button" href="https://instagram.com/YOURUSERNAME" target="_blank">
 Instagram
 </a>
 
-<a class="btn tiktok" href="https://tiktok.com/@YOURUSERNAME" target="_blank">
+<a class="button" href="https://tiktok.com/@YOURUSERNAME" target="_blank">
 TikTok
 </a>
 
-<a class="btn whatsapp" href="https://wa.me/521XXXXXXXXXX" target="_blank">
-Order on WhatsApp
+<a class="button" href="https://wa.me/521XXXXXXXXXX" target="_blank">
+Private Orders
 </a>
 
 <div class="footer">
-Limited Drops • CDMX • NFC Verified
+NFC AUTHENTICATED • LIMITED RELEASE
 </div>
 
 </body>
