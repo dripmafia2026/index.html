@@ -5,138 +5,170 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DripMafia CDMX</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
 <style>
-
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* BODY */
 body {
+    margin: 0;
     background-color: #0b0b0b;
     color: #f2f2f2;
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    text-align: center;
-    padding: 70px 25px;
-    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    animation: fadeIn 2s ease;
 }
 
-/* LOGO */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Floating dust canvas */
+#dustCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* Main content */
+.container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Logo */
 .logo {
-    width: 150px; /* keep your size */
-    animation: slowSpin 12s linear infinite;
+    width: 170px;
+    animation: slowSpin 30s linear infinite;
 }
 
 @keyframes slowSpin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* BRAND NAME */
-.brand-name {
-    font-size: 18px;
-    font-weight: 300;
-    opacity: 0.8;
-    margin-bottom: 12px;
+/* Brand */
+.brand {
+    margin-top: 35px;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    letter-spacing: 6px;
 }
 
-/* DIVIDER */
-.divider {
-    width: 50px;
-    height: 1px;
-    background: #777;
-    margin: 25px auto 45px auto;
+.subtitle {
+    margin-top: 8px;
+    font-size: 12px;
+    letter-spacing: 4px;
+    opacity: 0.6;
 }
 
-/* BUTTONS */
-.button {
-    display: block;
-    max-width: 300px;
-    margin: 18px auto;
-    padding: 14px;
-    border: 1px solid #666;
+/* Buttons */
+.buttons {
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    padding: 12px 28px;
     text-decoration: none;
-    color: #f2f2f2;
-    font-weight: 300;
-    transition: all 0.4s ease;
+    color: white;
+    border: 1px solid #444;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: 0.3s ease;
 }
 
-.button:hover {
-    background-color: #f2f2f2;
-    color: #0b0b0b;
-    border-color: #f2f2f2;
+.btn:hover {
+    background-color: white;
+    color: black;
 }
-
-/* FOOTER */
-.footer {
-    margin-top: 70px;
-    font-size: 11px;
-    opacity: 0.35;
-    letter-spacing: 1px;
-}
-
+</style>
+</head>
 
 <body>
 
-<!-- LOGO -->
-<div class="logo-container">
-    <img src="logo.png.PNG" alt="Hype Caps Logo">
+<canvas id="dustCanvas"></canvas>
+
+<div class="container">
+    <img src="logo.png.PNG" alt="DripMafia Logo" class="logo">
+    <div class="brand">DRIPMAFIA CDMX</div>
+    <div class="subtitle">Premium Street Apparel</div>
+
+    <div class="buttons">
+        <a href="https://www.tiktok.com/@drip.mafia_cdmx" class="btn" target="_blank">TikTok</a>
+        <a href="https://wa.me/521XXXXXXXXXX" class="btn" target="_blank">WhatsApp</a>
+    </div>
 </div>
 
-<!-- BRAND -->
-<div class="brand-name">DRIP MAFIA CDMX</div>
-<div class="divider"></div>
-
-<!-- LINKS -->
-<a class="button" href="https://instagram.com/YOURUSERNAME" target="_blank">
-Instagram
-</a>
-
-<a class="button" href="https://tiktok.com/@drip.mafia_cdmx" target="_blank">
-TikTok
-</a>
-
-<a class="button" href="https://wa.me/521XXXXXXXXXX" target="_blank">
-Private Orders
-</a>
-
-<!-- FOOTER -->
-<div class="footer">
-NFC AUTHENTICATED • LIMITED RELEASE • CDMX
-</div>
-<!-- Background Music -->
-<audio id="bgMusic" autoplay muted loop playsinline>
+<audio id="bgMusic" autoplay loop playsinline>
     <source src="music.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-window.addEventListener("touchstart", enableSound, { once: true });
-window.addEventListener("click", enableSound, { once: true });
+/* ===== Floating Dust Effect ===== */
+const canvas = document.getElementById("dustCanvas");
+const ctx = canvas.getContext("2d");
 
-function enableSound() {
-    var music = document.getElementById("bgMusic");
-    music.muted = false;
-    music.volume = 0;
-    music.play();
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    let fade = setInterval(function () {
-        if (music.volume < 0.25) {
-            music.volume += 0.02;
-        } else {
-            clearInterval(fade);
-        }
-    }, 100);
+let particles = [];
+
+for (let i = 0; i < 60; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5,
+        speed: Math.random() * 0.3 + 0.1
+    });
 }
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "rgba(255,255,255,0.08)";
+
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.y -= p.speed;
+        if (p.y < 0) {
+            p.y = canvas.height;
+            p.x = Math.random() * canvas.width;
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+/* Resize fix */
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+/* ===== Audio Autoplay ===== */
+var music = document.getElementById("bgMusic");
+
+music.play().catch(function() {
+    console.log("Autoplay blocked.");
+});
+
+document.addEventListener("click", function() {
+    music.play();
+}, { once: true });
 </script>
-
-
 
 </body>
 </html>
