@@ -138,31 +138,45 @@ color:gray;
 </audio>
 
 <script>
-/* Activate Audio On First Tap */
+
+/* Activate Audio On First Tap (iPhone Safe) */
+document.addEventListener("DOMContentLoaded", function(){
+
+const music = document.getElementById("bgMusic");
 document.body.addEventListener("click", function(){
-let music = document.getElementById("bgMusic");
-music.play();
+    music.play().catch(()=>{});
 },{ once:true });
 
 /* Floating Dust */
 for(let i=0;i<40;i++){
-let dust=document.createElement("div");
-dust.className="dust";
-dust.style.left=Math.random()*100+"vw";
-dust.style.animationDuration=(5+Math.random()*10)+"s";
-document.body.appendChild(dust);
+    let dust=document.createElement("div");
+    dust.className="dust";
+    dust.style.left=Math.random()*100+"vw";
+    dust.style.animationDuration=(5+Math.random()*10)+"s";
+    document.body.appendChild(dust);
 }
 
-/* Auto Slider Every 2 Seconds */
-let index=0;
-const slides=document.querySelectorAll('.slides img');
+/* Slider Setup */
+const slideContainer = document.querySelector('.slides');
+const slideImages = document.querySelectorAll('.slides img');
+const totalSlides = slideImages.length;
 
-function showSlide(){
-const container=document.querySelector('.slides');
-index=(index+1)%slides.length;
-container.style.transform=`translateX(${-index*100}%)`;
+let index = 0;
+
+function updateSlide(){
+    slideContainer.style.transform = `translateX(-${index * 100}%)`;
 }
-setInterval(showSlide,2000);
+
+/* Auto slide every 2 seconds */
+setInterval(() => {
+    index++;
+    if(index >= totalSlides){
+        index = 0;
+    }
+    updateSlide();
+}, 2000);
+
+});
 
 /* Popup */
 function openPopup(src){
@@ -172,6 +186,7 @@ document.getElementById("popup").style.display="flex";
 function closePopup(){
 document.getElementById("popup").style.display="none";
 }
+
 </script>
 
 <!-- Coin -->
