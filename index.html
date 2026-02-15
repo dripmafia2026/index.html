@@ -1,135 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRIP MAFIA CDMX</title>
-    <!-- Font Awesome for TikTok and WhatsApp icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
-    <style>
-        :root {
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --accent-color: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRIP MAFIA CDMX</title>
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
-        header {
-            width: 100%;
-            padding: 40px 0;
-            text-align: center;
-        }
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .logo-placeholder {
-            width: 80px;
-            height: 80px;
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            text-transform: uppercase;
-        }
+<style>
 
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 10px;
-            margin: 20px 0;
-            text-transform: uppercase;
-            font-weight: 900;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            width: 90%;
-            max-width: 1200px;
-            padding: 40px 0;
-        }
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+}
 
-        .product-item {
-            text-align: center;
-        }
+/* Logo */
+.logo {
+    margin-top: 30px;
+}
 
-        .product-item img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 50%; /* Makes images rounded */
-            border: 1px solid #333;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
+.logo img {
+    width: 140px;
+}
 
-        .product-item img:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-color);
-        }
+/* Brand Title */
+.brand-name {
+    font-family: 'Anton', sans-serif;
+    font-size: 60px;
+    letter-spacing: 6px;
+    margin: 30px 0;
+    text-transform: uppercase;
+}
 
-        /* Social Buttons */
-        .social-links {
-            margin: 40px 0;
-            display: flex;
-            gap: 20px;
-        }
+/* Social Icons */
+.social-buttons {
+    margin: 20px 0 40px 0;
+}
 
-        .social-btn {
-            color: var(--bg-color);
-            background-color: var(--accent-color);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
+.social-buttons a {
+    color: #fff;
+    font-size: 28px;
+    margin: 0 15px;
+    transition: 0.3s ease;
+}
 
-        .social-btn:hover {
-            opacity: 0.8;
-        }
-    </style>
+.social-buttons a:hover {
+    color: #999;
+    transform: scale(1.2);
+}
+
+/* Products Grid */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Rounded Images */
+.product img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    transition: 0.4s ease;
+}
+
+.product img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #fff;
+}
+
+/* Footer */
+footer {
+    margin: 60px 0 30px 0;
+    font-size: 14px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+</style>
 </head>
+
 <body>
 
-    <header>
-        <div class="logo.png1.PNG">Your Logo</div>
-        <h1>DRIP MAFIA CDMX</h1>
-    </header>
+<!-- Logo -->
+<div class="logo">
+    <img src="logo.png1.PNG" alt="DRIP MAFIA CDMX Logo">
+</div>
 
-    <div class="product-grid">
-        <!-- 10 Product Placeholders -->
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 1"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 2"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 3"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 4"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 5"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 6"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 7"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 8"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 9"></div>
-        <div class="product-item"><img src="https://via.placeholder.com" alt="Product 10"></div>
-    </div>
+<!-- Brand Name -->
+<div class="brand-name">
+    DRIP MAFIA CDMX
+</div>
 
-    <div class="social-links">
-        <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
+<!-- Social Media Buttons -->
+<div class="social-buttons">
+    <a href="https://www.tiktok.com/" target="@drip.mafia_cdmx">
+        <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://wa.me/5215640059098" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<!-- Products -->
+<div class="products">
+    <div class="product"><img src="product1.jpg"></div>
+    <div class="product"><img src="product2.jpg"></div>
+    <div class="product"><img src="product3.jpg"></div>
+    <div class="product"><img src="product4.jpg"></div>
+    <div class="product"><img src="product5.jpg"></div>
+    <div class="product"><img src="product6.jpg"></div>
+    <div class="product"><img src="product7.jpg"></div>
+    <div class="product"><img src="product8.jpg"></div>
+    <div class="product"><img src="product9.jpg"></div>
+    <div class="product"><img src="product10.jpg"></div>
+</div>
+
+<footer>
+    © 2026 DRIP MAFIA CDMX — ALL RIGHTS RESERVED
+</footer>
 
 </body>
 </html>
