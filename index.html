@@ -12,17 +12,42 @@
 
 body{
 font-family:'Orbitron',sans-serif;
-background:radial-gradient(circle at center,#111 0%,#000 70%);
 color:white;
-text-align:center;
-overflow-x:hidden;
+overflow:hidden;
+background:black;
+opacity:0;
+animation:fadeIn 2s forwards;
 }
 
-/* Floating Dust */
-.dust{
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* Background Video */
+video{
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+filter:brightness(40%) contrast(110%);
+}
+
+/* Ambient overlay */
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at center,rgba(255,255,255,0.05),transparent 70%);
+z-index:-1;
+}
+
+/* Floating Particles */
+.particle{
 position:absolute;
 width:3px;height:3px;
-background:rgba(255,255,255,0.4);
+background:rgba(255,255,255,0.5);
 border-radius:50%;
 animation:float linear infinite;
 }
@@ -31,42 +56,66 @@ from{transform:translateY(100vh);}
 to{transform:translateY(-10vh);}
 }
 
-/* 3D Coin */
-.coin-container{
-perspective:1000px;
+/* Center Layout */
+.container{
+text-align:center;
 margin-top:60px;
 }
-.coin{
-width:200px;height:200px;
-margin:auto;
-position:relative;
-transform-style:preserve-3d;
-animation:spin 10s linear infinite;
+
+/* Coin */
+.coin-container{
+perspective:1400px;
+margin:40px auto;
 }
+
+.coin{
+width:220px;height:220px;
+position:relative;
+margin:auto;
+transform-style:preserve-3d;
+animation:spin 14s linear infinite;
+}
+
 @keyframes spin{
 from{transform:rotateY(0deg);}
 to{transform:rotateY(360deg);}
 }
+
 .coin img{
 position:absolute;
 width:100%;height:100%;
 border-radius:50%;
 backface-visibility:hidden;
 }
+
 .coin .back{transform:rotateY(180deg);}
 
-/* Glow under coin */
-.glow{
-width:180px;height:20px;
-margin:20px auto;
-background:radial-gradient(ellipse at center,rgba(255,255,255,0.3),transparent);
-filter:blur(8px);
+/* Chrome Edge */
+.coin::before{
+content:'';
+position:absolute;
+width:100%;height:100%;
+border-radius:50%;
+border:3px solid #222;
+box-shadow:
+0 0 20px rgba(255,255,255,0.15),
+inset 0 0 40px rgba(0,0,0,0.9);
 }
 
+/* Reflection */
+.reflection{
+width:220px;height:80px;
+margin:auto;
+background:radial-gradient(ellipse at center,rgba(255,255,255,0.2),transparent);
+filter:blur(20px);
+opacity:0.5;
+}
+
+/* Brand */
 h1{
-margin-top:10px;
-font-size:26px;
-letter-spacing:5px;
+letter-spacing:8px;
+font-size:22px;
+margin-top:20px;
 }
 
 /* Social Icons */
@@ -74,172 +123,94 @@ letter-spacing:5px;
 margin-top:30px;
 display:flex;
 justify-content:center;
-gap:30px;
+gap:35px;
 }
+
 .social-icon{
-width:55px;height:55px;
+width:60px;height:60px;
 border-radius:50%;
 background:rgba(255,255,255,0.08);
-padding:12px;
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,0.3);
-transition:0.3s;
+padding:14px;
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.2);
+transition:0.4s;
 }
+
 .social-icon:hover{
 background:white;
-transform:scale(1.15);
+transform:scale(1.2);
 }
 
-/* Product Section */
-.slider{
-margin:50px auto;
-overflow:hidden;
-width:100%;
-}
-.slides{
-display:flex;
-gap:25px;
-padding:20px;
-transition:transform 0.6s ease-in-out;
-}
-.product{
-text-align:center;
-flex-shrink:0;
-}
-.product img{
-width:140px;height:140px;
-object-fit:cover;
-border-radius:50%;
-border:2px solid rgba(255,255,255,0.2);
-cursor:pointer;
-transition:0.3s;
-}
-.product img:hover{
-transform:scale(1.1);
-border:2px solid white;
-}
-.product-name{
-margin-top:10px;
-font-size:12px;
-letter-spacing:2px;
-color:#ccc;
-}
-.product-price{
-font-size:12px;
-color:white;
-}
-
-/* Popup */
-.popup{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:black;
-justify-content:center;
-align-items:center;
-z-index:999;
-flex-direction:column;
-}
-.popup img{
-max-width:90%;
-max-height:70%;
-}
-.popup-info{
-margin-top:20px;
-}
-.popup span{
+/* Product Carousel */
+.carousel{
 position:absolute;
-top:20px;
-right:30px;
-font-size:30px;
-cursor:pointer;
+bottom:40px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:40px;
 }
 
-footer{
-margin:50px 0 20px;
-font-size:12px;
-color:gray;
+.product img{
+width:120px;height:120px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid rgba(255,255,255,0.2);
+transition:0.6s;
+}
+
+.product img:hover{
+transform:scale(1.15);
+border:2px solid white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Audio -->
-<audio id="bgMusic" loop>
+<!-- Background Video -->
+<video autoplay muted loop playsinline>
+<source src="bg.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<audio id="music" loop>
 <source src="music.mp3.1.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded",function(){
 
-/* Activate Audio On First Tap */
-const music=document.getElementById("bgMusic");
-document.body.addEventListener("click",function(){
-music.play().catch(()=>{});
+/* Activate music on first tap */
+document.body.addEventListener("click",()=>{
+document.getElementById("music").play().catch(()=>{});
 },{once:true});
 
-/* Floating Dust */
-for(let i=0;i<40;i++){
-let dust=document.createElement("div");
-dust.className="dust";
-dust.style.left=Math.random()*100+"vw";
-dust.style.animationDuration=(5+Math.random()*10)+"s";
-document.body.appendChild(dust);
-}
-
-/* Auto Slider */
-const slides=document.querySelector('.slides');
-const products=document.querySelectorAll('.product');
-let index=0;
-
-function autoSlide(){
-index++;
-if(index>=products.length){index=0;}
-slides.style.transform=`translateX(-${index*170}px)`;
-}
-setInterval(autoSlide,2000);
-
-/* Swipe Support */
-let startX=0;
-slides.addEventListener("touchstart",(e)=>startX=e.touches[0].clientX);
-slides.addEventListener("touchend",(e)=>{
-let endX=e.changedTouches[0].clientX;
-if(startX-endX>50){autoSlide();}
-if(endX-startX>50){
-index--;
-if(index<0){index=products.length-1;}
-slides.style.transform=`translateX(-${index*170}px)`;
+/* Floating particles */
+for(let i=0;i<50;i++){
+let p=document.createElement("div");
+p.className="particle";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(6+Math.random()*10)+"s";
+document.body.appendChild(p);
 }
 });
-
-});
-
-/* Popup */
-function openPopup(src,name,price){
-document.getElementById("popupImg").src=src;
-document.getElementById("popupName").innerText=name;
-document.getElementById("popupPrice").innerText=price;
-document.getElementById("popup").style.display="flex";
-}
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
 </script>
 
-<!-- Coin Logo -->
+<div class="container">
+
 <div class="coin-container">
 <div class="coin">
 <img src="logo.png1.PNG">
 <img src="logo.png1.PNG" class="back">
 </div>
 </div>
-<div class="glow"></div>
+
+<div class="reflection"></div>
 
 <h1>DRIPMAFIA CDMX</h1>
 
-<!-- Social Icons -->
 <div class="socials">
 <a href="https://www.tiktok.com/@drip.mafia_cdmx" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" class="social-icon">
@@ -249,44 +220,13 @@ document.getElementById("popup").style.display="none";
 </a>
 </div>
 
-<!-- Products -->
-<div class="slider">
-<div class="slides">
-
-<div class="product">
-<img src="product1.jpg.heic" onclick="openPopup(this.src,'Black Bélico Cap','$899 MXN')">
-<div class="product-name">BLACK BÉLICO</div>
-<div class="product-price">$899 MXN</div>
 </div>
 
-<div class="product">
-<img src="product2.jpg.heic" onclick="openPopup(this.src,'White Hype Snap','$799 MXN')">
-<div class="product-name">WHITE HYPE</div>
-<div class="product-price">$799 MXN</div>
+<div class="carousel">
+<div class="product"><img src="product1.jpg.heic"></div>
+<div class="product"><img src="product2.jpg.heic"></div>
+<div class="product"><img src="product3.jpg.heic"></div>
 </div>
-
-<div class="product">
-<img src="product3.jpg.heic" onclick="openPopup(this.src,'Midnight Street','$950 MXN')">
-<div class="product-name">MIDNIGHT</div>
-<div class="product-price">$950 MXN</div>
-</div>
-
-</div>
-</div>
-
-<!-- Popup -->
-<div class="popup" id="popup">
-<span onclick="closePopup()">✕</span>
-<img id="popupImg">
-<div class="popup-info">
-<h2 id="popupName"></h2>
-<p id="popupPrice"></p>
-</div>
-</div>
-
-<footer>
-© 2026 DripMafia CDMX — Premium Streetwear
-</footer>
 
 </body>
 </html>
